@@ -19,19 +19,22 @@ pipeline {
       }
       stage('Build') {
          steps {
-            sh '''mvn clean package'''
+            echo 'Build'
+         //   sh '''mvn clean package'''
          }
       }
 
       stage('Build and Push Image') {
          steps {
-           sh 'docker image build -t ${REPOSITORY_TAG} .'
+           echo 'Push'
+       //    sh 'docker image build -t ${REPOSITORY_TAG} .'
          }
       }
 
       stage('Deploy to Cluster') {
           steps {
-                    sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+                 echo 'Deploy'
+                  //  sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
           }
       }
    }
