@@ -21,21 +21,21 @@ pipeline {
          steps {
             echo 'Build'
           //  sh 'mvn --version'
-         //   sh '''mvn clean package'''
+            sh '''mvn clean package'''
          }
       }
 
       stage('Build and Push Image') {
          steps {
            echo 'Push'
-       //    sh 'docker image build -t ${REPOSITORY_TAG} .'
+           sh 'docker image build -t ${REPOSITORY_TAG} .'
          }
       }
 
       stage('Deploy to Cluster') {
           steps {
                  echo 'Deploy'
-                  //  sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+                  sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
           }
       }
    }
